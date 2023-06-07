@@ -1,7 +1,7 @@
 def insertion_sort(str):
     trocas = 0
     arr = list(str)
-    #arr = arr[0:len(arr) -1] # SOMENTO SE FOR TESTE EM ARQUIVOO
+    arr = arr[0:len(arr) -1] # SOMENTO SE FOR TESTE EM ARQUIVOO
     for i in range(1, len(arr)):
         key = arr[i]
         j = i - 1
@@ -23,35 +23,36 @@ while(qnt_dataset > 0):
     input()
     # descomente abaixo para trabalhar com arquivos
     #f.readline()
-    hashs_repetidos = [] 
     # comente abaixo para trabalhar com arquivos
     dataset_info = input()
+    #descomente abaixo para trabalhar com arquivos
+    #dataset_info = f.readline()             
     tamanho_string = int(dataset_info.split()[0])
     quantidade_strings = int(dataset_info.split()[1])
-   # descomente abaixo para trabalhar com arquivos
-   # dataset_info = f.readline()             
-   # tamanho_string = int(dataset_info[0])
-   # quantidade_strings = int(dataset_info.split()[1])
     dataset = []
     i = 0
     while(i < quantidade_strings):
         #dataset.append(f.readline())
         dataset.append(input())
         i += 1
-    hashMap = {} 
+    itensRes = []
     for i in range(0, quantidade_strings):
-        if dataset[i] in hashMap:   
-            hashs_repetidos.append(dataset[i]) 
-        hashMap[f'{dataset[i]}'] = insertion_sort(dataset[i])
+        itensRes.append([{dataset[i]}, insertion_sort(dataset[i])]) 
 
-    sorted_hash_map = sorted(hashMap.items(), key=lambda x:x[1])
-    for i in range(0, quantidade_strings-len(hashs_repetidos)):
-        output = sorted_hash_map[i][0]
-        outputFinal.append(output[0:tamanho_string])
-        while output in hashs_repetidos:
-            outputFinal.append(output[0:tamanho_string])
-            hashs_repetidos.pop(hashs_repetidos.index(output))
+    sortedItensRes = []
+    while(len(itensRes) > 0):
+        menor = ['qualquer coisa', 100000000000]
+        for i in range(0, len(itensRes)):
+            if(itensRes[i][1] < menor[1]):
+                menor = itensRes[i]
+        sortedItensRes.append(menor[0])
+        indexOfMenor = itensRes.index(menor)
+        itensRes.pop(indexOfMenor)
+    
+    for i in range(0, quantidade_strings):
+        outputFinal.append(list(sortedItensRes[i])[0][0:tamanho_string])
     outputFinal.append('')
     qnt_dataset -= 1
+    
 for i in range(0, len(outputFinal)):
     print(outputFinal[i])
