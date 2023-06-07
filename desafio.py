@@ -1,7 +1,7 @@
 def insertion_sort(str):
     trocas = 0
     arr = list(str)
-    arr = arr[0:len(arr) -1] # SOMENTO SE FOR TESTE EM ARQUIVOO
+  #  arr = arr[0:len(arr) -1] # SOMENTO SE FOR TESTE EM ARQUIVOO
     for i in range(1, len(arr)):
         key = arr[i]
         j = i - 1
