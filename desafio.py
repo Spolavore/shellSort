@@ -1,11 +1,7 @@
-
-# insertion_sort modificado: dada um string
-# ele ira ordenar ela e retornar a quantidade
-# de trocas realizada por ele .
 def insertion_sort(str):
-    arr = list(str)
-    arr = arr[0:len(arr)]
     trocas = 0
+    arr = list(str)
+    #arr = arr[0:len(arr) -1] # SOMENTO SE FOR TESTE EM ARQUIVOO
     for i in range(1, len(arr)):
         key = arr[i]
         j = i - 1
@@ -16,22 +12,26 @@ def insertion_sort(str):
         arr[j + 1] = key
     return trocas
 
+# comente abaixo para trabalhar com arquivos
+qnt_dataset = int(input())
+# descomente abaixo para trabalhar com arquivos
 #f = open('input612.txt', 'r') 
 #qnt_dataset = int(f.readline())
-qnt_dataset = int(input())
-   
+outputFinal = []
 while(qnt_dataset > 0):
+    # comente abaixo para trabalhar com arquivos
     input()
-    hashs_repetidos = [] # lista que ira guardar todos os valores repetidos do data_set
+    # descomente abaixo para trabalhar com arquivos
     #f.readline()
-    # parte do codigo que pega os dados
-    # do arquivo lido e separa em variaveis inicio:
-    #dataset_info = f.readline()
-    #tamanho_string = int(dataset_info[0])
-    #quantidade_strings = int(dataset_info.split()[1])
+    hashs_repetidos = [] 
+    # comente abaixo para trabalhar com arquivos
     dataset_info = input()
     tamanho_string = int(dataset_info.split()[0])
     quantidade_strings = int(dataset_info.split()[1])
+   # descomente abaixo para trabalhar com arquivos
+   # dataset_info = f.readline()             
+   # tamanho_string = int(dataset_info[0])
+   # quantidade_strings = int(dataset_info.split()[1])
     dataset = []
     i = 0
     while(i < quantidade_strings):
@@ -39,19 +39,19 @@ while(qnt_dataset > 0):
         dataset.append(input())
         i += 1
     hashMap = {} 
-
-    #inicio da verificacao da desordenacao de cada string do dataset
     for i in range(0, quantidade_strings):
         if dataset[i] in hashMap:   
-            hashs_repetidos.append(dataset[i]) # se a sequencia atual ja esta no hash entao conta ela repetida
+            hashs_repetidos.append(dataset[i]) 
         hashMap[f'{dataset[i]}'] = insertion_sort(dataset[i])
 
-    sorted_hash_map = sorted(hashMap.items(), key=lambda x:x[1])# funcao para ordenaro hash map
+    sorted_hash_map = sorted(hashMap.items(), key=lambda x:x[1])
     for i in range(0, quantidade_strings-len(hashs_repetidos)):
         output = sorted_hash_map[i][0]
-        print(output[0:tamanho_string]) # print a sequencia de dna sem o \n
-        if output in hashs_repetidos: # print os valores repetidos abaixo da sequencia igual a ela
-            print(output[0:tamanho_string])
-    print('')
+        outputFinal.append(output[0:tamanho_string])
+        while output in hashs_repetidos:
+            outputFinal.append(output[0:tamanho_string])
+            hashs_repetidos.pop(hashs_repetidos.index(output))
+    outputFinal.append('')
     qnt_dataset -= 1
-#f.close()
+for i in range(0, len(outputFinal)):
+    print(outputFinal[i])
