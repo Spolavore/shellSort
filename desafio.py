@@ -50,9 +50,7 @@ while(qnt_dataset > 0):
         itensRes.pop(indexOfMenor)
     
     for i in range(0, quantidade_strings):
-        outputFinal.append(list(sortedItensRes[i])[0][0:tamanho_string])
-    outputFinal.append('')
+        print(list(sortedItensRes[i])[0][0:tamanho_string])
+    print('')
     qnt_dataset -= 1
     
-for i in range(0, len(outputFinal)):
-    print(outputFinal[i])
